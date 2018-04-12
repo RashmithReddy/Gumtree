@@ -1,15 +1,23 @@
 package com.gumtree.stepdef;
 
 
+import com.gumtree.config.Environment;
+import com.gumtree.pages.GooglePage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
+
+import javax.inject.Inject;
 
 public class SearchForGumtreeLinksStepDef {
 
+    @Inject
+    GooglePage gp;
+
     @Given("^I am on Google$")
     public void iAmOnGoogle() throws Throwable {
-
+        Assert.assertEquals(Environment.getProperty("google.homepage.title"),gp.getTitle());
     }
 
     @When("^I search for (.*)$")
