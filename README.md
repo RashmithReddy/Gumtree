@@ -10,3 +10,6 @@
 
 #### Used factory pattern to get the required driver
 
+#### Task 3 test cases can be found at:
+    /src/test/resources/features/task3TestCases.feature
+
