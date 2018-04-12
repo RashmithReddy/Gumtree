@@ -5,6 +5,7 @@ import com.gumtree.config.Environment;
 import com.gumtree.helpers.Injection;
 import cucumber.runtime.Env;
 import cucumber.runtime.java.guice.ScenarioScoped;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -36,7 +37,7 @@ public class GooglePage extends BasePage {
         googleResultsList = driver.findElements(By.xpath(".//*[@class='r']/a"));
     }
 
-    public void gumtreeLinks() throws Exception{
+    public void gumtreeLinks() throws InterruptedException{
         String home =driver.getCurrentUrl();
         List<String> allUrls = googleResultsList.stream().map(el -> el.getAttribute("href")).collect(Collectors.toList());
         System.out.println("Urls "+allUrls);
@@ -47,11 +48,8 @@ public class GooglePage extends BasePage {
                 driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
                 // ** Checks whether gumtree page title matches and results exists in gumtree
-                if (gumtreePage.getTitle().contains(gumtreeTitle) && gumtreePage.doesResultsExistInPage()) {
-                    System.out.println("SUCCESS");
-                } else {
-                    throw new Exception("Either page title does not match or list does not contain any elements");
-                }
+                Boolean expectedCondition = gumtreePage.getTitle().contains(gumtreeTitle) && gumtreePage.doesResultsExistInPage();
+                Assert.assertTrue(expectedCondition);
                 driver.navigate().to(home);
             }
         }
