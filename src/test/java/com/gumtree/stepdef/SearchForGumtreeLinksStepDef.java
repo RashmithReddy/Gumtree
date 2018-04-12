@@ -29,7 +29,6 @@ public class SearchForGumtreeLinksStepDef {
     @Then("^I should see a list of results$")
     public void resultsFromTheSearch() throws Throwable {
         gp.returnListOfElements();
-
     }
 
     @Then("^I select each Gumtree link from the list to validate that each link has a minimum of (\\d+) advert$")

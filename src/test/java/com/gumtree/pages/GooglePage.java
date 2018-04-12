@@ -36,9 +36,10 @@ public class GooglePage extends BasePage {
         googleResultsList = driver.findElements(By.xpath(".//*[@class='r']/a"));
     }
 
-    public void gumtreeLinks() throws InterruptedException{
+    public void gumtreeLinks() throws Exception{
         String home =driver.getCurrentUrl();
         List<String> allUrls = googleResultsList.stream().map(el -> el.getAttribute("href")).collect(Collectors.toList());
+        System.out.println("Urls "+allUrls);
 
         for(String linkText : allUrls) {
             if (linkText.contains(gumtreeUrl)) {
@@ -46,8 +47,10 @@ public class GooglePage extends BasePage {
                 driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
                 // ** Checks whether gumtree page title matches and results exists in gumtree
-                if (gumtreePage.getTitle().equalsIgnoreCase(gumtreeTitle) && gumtreePage.doesResultsExistInPage()) {
+                if (gumtreePage.getTitle().contains(gumtreeTitle) && gumtreePage.doesResultsExistInPage()) {
                     System.out.println("SUCCESS");
+                } else {
+                    throw new Exception("Either page title does not match or list does not contain any elements");
                 }
                 driver.navigate().to(home);
             }
