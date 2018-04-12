@@ -22,15 +22,18 @@ public class SearchForGumtreeLinksStepDef {
 
     @When("^I search for (.*)$")
     public void searchOnGoogle(String searchString) throws Throwable {
+        gp.searchString(searchString);
 
     }
 
     @Then("^I should see a list of results$")
     public void resultsFromTheSearch() throws Throwable {
+        gp.returnListOfElements();
+
     }
 
     @Then("^I select each Gumtree link from the list to validate that each link has a minimum of (\\d+) advert$")
     public void checkGumtreeLinksFromTheSearch(int arg1) throws Throwable {
-
+        gp.gumtreeLinks();
     }
 }
