@@ -23,7 +23,6 @@ public class SearchForGumtreeLinksStepDef {
     @When("^I search for (.*)$")
     public void searchOnGoogle(String searchString) throws Throwable {
         gp.searchString(searchString);
-
     }
 
     @Then("^I should see a list of results$")
